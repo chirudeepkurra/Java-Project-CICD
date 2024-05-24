@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'chirudeepkurra/maven-docker-agent:v1'
+      image 'chirudeepkurra/java-maven:v1'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
@@ -31,7 +31,7 @@ pipeline {
     }
     stage('Build and Push Docker Image') {
       environment {
-        DOCKER_IMAGE = "chirudeepkurra/java-ci-cd:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "chirudeepkurra/java-project-cicd:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "Java-Project-CICD/spring-boot-app/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
